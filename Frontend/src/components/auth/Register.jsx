@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { registerSchema } from "@shared/validation/userValidation.js";
+import { registerSchema } from "../../validation/userValidation";
 import { Link, useNavigate } from "react-router-dom";
 import "../../style/Auth.css";
 
