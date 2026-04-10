@@ -3,7 +3,7 @@ const cors = require("cors");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
-const { registerSchema } = require("../../shared/validation/userValidation");
+const { registerSchema } = require("../validation/userValidation");
 
 const router = express.Router();
 
