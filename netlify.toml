@@ -1,0 +1,18 @@
+[build]
+  base = "Frontend"                     # Run build inside Frontend folder
+  command = "npm ci && npm run build"   # Install deps and build
+  publish = "dist"                      # Vite outputs to dist by default
+
+[functions]
+  directory = "netlify/functions"       # Optional serverless functions folder
+
+[context.production.environment]
+  DB_HOST = "localhost"
+  DB_USER = "root"
+  DB_PASSWORD = "Joeyricalde_072201"
+  DB_NAME = "inventory_db"
+  PORT = "5000"
+  JWT_SECRET = "someStrongSecret"
+  EMAIL_USER = "toyotadavaocityemail@gmail.com"
+  EMAIL_PASS = "wlznypobekkesqkt"
+  FRONTEND_URL = "http://localhost:5173"
