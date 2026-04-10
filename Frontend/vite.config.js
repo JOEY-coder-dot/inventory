@@ -11,10 +11,15 @@ export default defineConfig({
       "/api": "http://localhost:5000"   // ✅ forward API calls to backend
     }
   },
+
+  
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
       "@shared": path.resolve(__dirname, "../shared")
     }
+  },
+  build: {
+    outDir: "dist"   // ✅ Netlify will publish this
   }
 });
