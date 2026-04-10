@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { registerSchema } from "../../validation/userValidation";
+import { validateRegisterForm } from "../../validation/registerValidation"; // ✅ regex validator
 import { Link, useNavigate } from "react-router-dom";
 import "../../style/Auth.css";
 
@@ -20,26 +20,17 @@ export default function Register() {
     setFormData(newFormData);
     setTouched({ ...touched, [name]: true });
 
-    const { error } = registerSchema.validate(newFormData, { abortEarly: false });
-    if (error) {
-      const newErrors = {};
-      error.details.forEach((detail) => {
-        newErrors[detail.path[0]] = detail.message;
-      });
-      setErrors(newErrors);
-    } else {
-      setErrors({});
-    }
+    // ✅ Run regex validation on every change
+    const newErrors = validateRegisterForm(newFormData);
+    setErrors(newErrors);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { error } = registerSchema.validate(formData, { abortEarly: false });
-    if (error) {
-      const newErrors = {};
-      error.details.forEach((detail) => {
-        newErrors[detail.path[0]] = detail.message;
-      });
+
+    // ✅ Validate before submit
+    const newErrors = validateRegisterForm(formData);
+    if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
@@ -114,7 +105,6 @@ export default function Register() {
 
         <button type="submit" className="auth-button">Register</button>
 
-        {/* ✅ Back to login link */}
         <p style={{ marginTop: "1rem" }} className="auth-link">
           Already have an account? <Link to="/login">Back to Login</Link>
         </p>
